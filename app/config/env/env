@@ -1,0 +1,3 @@
+PORT= 3000
+BASE_API_URL= http://localhost:8090/auth/realms/Grupo-06
+
