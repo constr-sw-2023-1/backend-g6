@@ -6,9 +6,10 @@ routes.get('/', (req, res) => {
     res.send('Bem-vindo à minha API!');
 });
 
-routes.get('/login', (req, res) => {
+routes.post('/login', (req, res) => {
+    console.log(req)
     userController.login(req, res).then(r => {
-        console.log('teste')
+        res.send("Login realizado com sucesso!");
     });
 })
 

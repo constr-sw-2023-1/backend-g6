@@ -1,0 +1,6 @@
+PORT= 3000
+BASE_API_URL= http://localhost:8090/auth/realms/Grupo-06/protocol/openid-connect/token
+CLIENT_ID= grupo06
+GRANT_TYPE = password
+CLIENT_SECRET= KDP40Ue5YHJQDFuSD8bfVCRqcus44nq8
+

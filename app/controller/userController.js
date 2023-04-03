@@ -1,31 +1,32 @@
 const User = require('../models/user');
 const axios = require('axios')
 const qs = require('qs');
+const config = require('../config/config');
 
 const userController = {};
 
 userController.login = async (req, res) => {
     try {
         const data = qs.stringify({
-        'grant_type': 'password',
-        'client_id': 'grupo06',
-        'client_secret': 'KDP40Ue5YHJQDFuSD8bfVCRqcus44nq8',
+        'grant_type': config.grantType,
+        'client_id': config.clientId,
+        'client_secret': config.clientSecret,
         'username': 'douglas',
         'password': '123456789'
     });
-    const config = {
+    const configReq = {
         method: 'post',
-        url: 'http://localhost:8090/auth/realms/Grupo-06/protocol/openid-connect/token',
+        url: config.baseApiUrl,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         data : data
     };
 
-    axios(config)
+    axios(configReq)
         .then(function (response) {
             User.acessToken.value = response.data.access_token
-            console.log(User);
+            return data;
         })
         .catch(function (error) {
             return error;
