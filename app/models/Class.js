@@ -23,10 +23,10 @@ const Classes = {
             required: true
         },
         schedule: {
-            type: 
+            type: String
         }
 
-    }
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -37,4 +37,4 @@ const Classes = {
 
 };
 
-module.exports = UserSchema;
+module.exports = CLassSchema;
