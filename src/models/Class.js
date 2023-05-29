@@ -28,6 +28,11 @@ Class.init({
     classShiftId: {
         type: DataTypes.UUID,
         allowNull: false
+    },
+    active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
     }
 }, {
     sequelize,

@@ -6,7 +6,7 @@ exports.createShift = async (req, res) => {
 };
 
 exports.deleteShift = async (req, res) => {
-    await Shift.destroy({ where: { id: req.params.id } });
+    await Shift.update({active: false},{ where: { id: req.params.id } });
     res.status(204).end();
 };
 

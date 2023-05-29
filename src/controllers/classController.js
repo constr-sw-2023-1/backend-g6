@@ -8,7 +8,7 @@ exports.createClass = async (req, res) => {
 };
 
 exports.deleteClass = async (req, res) => {
-    await Class.destroy({ where: { id: req.params.id } });
+    await Class.update({active : false} ,{ where: { id: req.params.id } });
     res.status(204).end();
 };
 
