@@ -32,3 +32,6 @@ docker-compose up -d --build
 ```
 3. Acesse o endereço http://localhost:3000/api-docs para acessar a documentação da API.
 
+4. Diagrama Astah
+
+![Diagrama](public/pngDiagram.png)
