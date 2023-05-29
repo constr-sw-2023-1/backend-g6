@@ -4,10 +4,14 @@ const sequelize = require('../config/database');
 class Class extends Model {}
 
 Class.init({
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+    },
     numClass: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
     },
     year: {
         type: DataTypes.INTEGER,
