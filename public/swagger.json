@@ -1,0 +1,499 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Sistema de Gerenciamento de Turmas API",
+    "description": "API do Sistema de Gerenciamento de Turmas"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Classes",
+      "description": "API para gerenciar as classes"
+    },
+    {
+      "name": "Shifts",
+      "description": "API para gerenciar as shifts"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/classes": {
+      "post": {
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Cria uma nova classe",
+        "description": "Cria uma nova classe com os dados fornecidos",
+        "operationId": "createClass",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto de classe que precisa ser adicionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Class"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Classe criada"
+          },
+          "400": {
+            "description": "Dados de entrada inválidos"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Obtém todas as classes",
+        "description": "Obtém uma lista de todas as classes",
+        "operationId": "getAllClasses",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/classes/{classId}": {
+      "get": {
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Encontra uma classe pelo ID",
+        "description": "Retorna uma única classe com o ID fornecido",
+        "operationId": "getClassById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "ID da classe a ser encontrada",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "schema": {
+              "$ref": "#/definitions/Class"
+            }
+          },
+          "404": {
+            "description": "Classe não encontrada"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Atualiza uma classe existente",
+        "description": "Atualiza uma classe com o ID fornecido",
+        "operationId": "updateClass",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "ID da classe a ser atualizada",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto de classe com os campos atualizados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Class"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Classe atualizada"
+          },
+          "400": {
+            "description": "Dados de entrada inválidos"
+          },
+          "404": {
+            "description": "Classe não encontrada"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Atualiza parcialmente uma classe existente",
+        "description": "Atualiza parcialmente uma classe com o ID fornecido",
+        "operationId": "patchClass",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "ID da classe a ser atualizada parcialmente",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto de classe com os campos a serem atualizados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Class"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Classe parcialmente atualizada"
+          },
+          "400": {
+            "description": "Dados de entrada inválidos"
+          },
+          "404": {
+            "description": "Classe não encontrada"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Exclui uma classe existente",
+        "description": "Exclui uma classe com o ID fornecido",
+        "operationId": "deleteClass",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "ID da classe a ser excluída",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Classe excluída"
+          },
+          "404": {
+            "description": "Classe não encontrada"
+          }
+        }
+      }
+    },
+    "/api/shifts": {
+      "post": {
+        "tags": [
+          "Shifts"
+        ],
+        "summary": "Cria uma nova shift",
+        "description": "Cria uma nova shift com os dados fornecidos",
+        "operationId": "createShift",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto de shift que precisa ser adicionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Shift"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Shift criada"
+          },
+          "400": {
+            "description": "Dados de entrada inválidos"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Shifts"
+        ],
+        "summary": "Obtém todas as shifts",
+        "description": "Obtém uma lista de todas as shifts",
+        "operationId": "getAllShifts",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Shift"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shifts/{shiftId}": {
+      "get": {
+        "tags": [
+          "Shifts"
+        ],
+        "summary": "Encontra uma shift pelo ID",
+        "description": "Retorna uma única shift com o ID fornecido",
+        "operationId": "getShiftById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "shiftId",
+            "in": "path",
+            "description": "ID da shift a ser encontrada",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "schema": {
+              "$ref": "#/definitions/Shift"
+            }
+          },
+          "404": {
+            "description": "Shift não encontrada"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Shifts"
+        ],
+        "summary": "Atualiza uma shift existente",
+        "description": "Atualiza uma shift com o ID fornecido",
+        "operationId": "updateShift",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "shiftId",
+            "in": "path",
+            "description": "ID da shift a ser atualizada",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto de shift com os campos atualizados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Shift"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shift atualizada"
+          },
+          "400": {
+            "description": "Dados de entrada inválidos"
+          },
+          "404": {
+            "description": "Shift não encontrada"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Shifts"
+        ],
+        "summary": "Atualiza parcialmente uma shift existente",
+        "description": "Atualiza parcialmente uma shift com o ID fornecido",
+        "operationId": "patchShift",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "shiftId",
+            "in": "path",
+            "description": "ID da shift a ser atualizada parcialmente",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto de shift com os campos a serem atualizados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Shift"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shift parcialmente atualizada"
+          },
+          "400": {
+            "description": "Dados de entrada inválidos"
+          },
+          "404": {
+            "description": "Shift não encontrada"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Shifts"
+        ],
+        "summary": "Exclui uma shift existente",
+        "description": "Exclui uma shift com o ID fornecido",
+        "operationId": "deleteShift",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "shiftId",
+            "in": "path",
+            "description": "ID da shift a ser excluída",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Shift excluída"
+          },
+          "404": {
+            "description": "Shift não encontrada"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Class": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID da classe"
+        },
+        "numClass": {
+          "type": "integer",
+          "description": "Número da classe"
+        },
+        "year": {
+          "type": "integer",
+          "description": "Ano da classe"
+        },
+        "semester": {
+          "type": "integer",
+          "description": "Semestre da classe"
+        },
+        "schedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "description": "Agenda da classe"
+        },
+        "classShiftId": {
+          "type": "string",
+          "description": "ID do turno da classe"
+        }
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "properties": {
+        "weekDay": {
+          "type": "integer",
+          "description": "Dia da semana"
+        },
+        "schedule": {
+          "type": "string",
+          "description": "Horário"
+        }
+      }
+    },
+    "Shift": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID da shift"
+        },
+        "period": {
+          "type": "string",
+          "description": "Período da shift"
+        }
+      }
+    }
+  }
+}
