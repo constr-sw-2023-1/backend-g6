@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const classController = require('../controllers/classController');
@@ -9,7 +10,7 @@ router.put('/:id', classController.updateClass); // atualização de todo o obje
 router.patch('/:id', classController.patchClass); // atualização de alguns atributos do objeto
 router.get('/', classController.getAllClasses); // recuperação de todos os objetos
 router.get('/:id', classController.getClassById); // recuperação de um objeto pelo seu id
-router.get('/', classController.getClassesByQueryString); // recuperação de um objeto por uma query string simples
-router.get('/', classController.getClassesByComplexQueryString); // recuperação de um objeto por uma query string complexa
+router.get('/query', classController.getClassesByQueryString); // recuperação de um objeto por uma query string simples
+router.get('/complexQuery', classController.getClassesByComplexQueryString); // recuperação de um objeto por uma query string complexa
 
 module.exports = router;
