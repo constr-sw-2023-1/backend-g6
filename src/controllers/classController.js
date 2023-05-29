@@ -1,4 +1,6 @@
 const Class = require('../models/Class');
+const { Op } = require('sequelize');
+
 
 exports.createClass = async (req, res) => {
     const newClass = await Class.create(req.body);
@@ -37,12 +39,13 @@ exports.getClassesByQueryString = async (req, res) => {
 
 function getOperatorAndValueFromQuery(queryValue) {
     const operatorMappings = {
-        'neq': Op.ne,
-        'gt': Op.gt,
-        'gteq': Op.gte,
-        'lt': Op.lt,
-        'lteq': Op.lte,
-        'like': Op.like
+        'eq': Op.eq,   // é equivalente a "=" em SQL
+        'neq': Op.ne,  // é equivalente a "<>" ou "!=" em SQL
+        'gt': Op.gt,   // é equivalente a ">" em SQL
+        'gteq': Op.gte, // é equivalente a ">=" em SQL
+        'lt': Op.lt,   // é equivalente a "<" em SQL
+        'lteq': Op.lte, // é equivalente a "<=" em SQL
+        'like': Op.like // é usado para operações "LIKE" em SQL
     };
 
     const [operator, value] = queryValue.split('}');
@@ -66,6 +69,8 @@ exports.getClassesByComplexQueryString = async (req, res) => {
             whereClause[key] = value;
         }
     }
+
+    console.log(whereClause)
 
     try {
         const classes = await Class.findAll({ where: whereClause });

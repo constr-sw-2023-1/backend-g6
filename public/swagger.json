@@ -27,6 +27,124 @@
     "application/json"
   ],
   "paths": {
+    "/api/classes/query": {
+      "get": {
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Obtém turmas com base em uma consulta simples",
+        "description": "Obtém turmas com base em parâmetros simples de query string.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "numClass",
+            "description": "Número da turma.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "year",
+            "description": "Ano da turma.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "semester",
+            "description": "Semestre da turma.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "classShiftId",
+            "description": "ID do turno da turma.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Turmas não encontradas"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/api/classes/complexQuery": {
+      "get": {
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Obtenha turmas com uma query string complexa",
+        "description": "Obtenha turmas com base em parâmetros complexos de query string. Os parâmetros devem ser passados ​​no formato: {operator}value",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "numClass",
+            "description": "Número da turma. Exemplo: {eq}10",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "year",
+            "description": "Ano da turma. Exemplo: {gteq}2022",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "semester",
+            "description": "Semestre da turma. Exemplo: {eq}1",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "classShiftId",
+            "description": "ID do turno da turma. Exemplo: {eq}abc123",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Turmas não encontradas"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
     "/api/classes": {
       "post": {
         "tags": [
@@ -284,124 +402,6 @@
                 "$ref": "#/definitions/Shift"
               }
             }
-          }
-        }
-      }
-    },
-    "/classes/query": {
-      "get": {
-        "tags": [
-          "Classes"
-        ],
-        "summary": "Obtém turmas com base em uma consulta simples",
-        "description": "Obtém turmas com base em parâmetros simples de query string.",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "numClass",
-            "description": "Número da turma.",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "year",
-            "description": "Ano da turma.",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "semester",
-            "description": "Semestre da turma.",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "classShiftId",
-            "description": "ID do turno da turma.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operação bem-sucedida",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Class"
-              }
-            }
-          },
-          "400": {
-            "description": "Requisição inválida"
-          },
-          "404": {
-            "description": "Turmas não encontradas"
-          },
-          "500": {
-            "description": "Erro interno do servidor"
-          }
-        }
-      }
-    },
-    "/classes/complexQuery": {
-      "get": {
-        "tags": [
-          "Classes"
-        ],
-        "summary": "Obtenha turmas com uma query string complexa",
-        "description": "Obtenha turmas com base em parâmetros complexos de query string. Os parâmetros devem ser passados ​​no formato: {operator}value",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "numClass",
-            "description": "Número da turma. Exemplo: {eq}10",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "year",
-            "description": "Ano da turma. Exemplo: {gteq}2022",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "semester",
-            "description": "Semestre da turma. Exemplo: {eq}1",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "classShiftId",
-            "description": "ID do turno da turma. Exemplo: {eq}abc123",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operação bem-sucedida",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Class"
-              }
-            }
-          },
-          "400": {
-            "description": "Requisição inválida"
-          },
-          "404": {
-            "description": "Turmas não encontradas"
-          },
-          "500": {
-            "description": "Erro interno do servidor"
           }
         }
       }
