@@ -5,6 +5,7 @@ const shiftRoutes = require('./routes/shiftRoutes');
 const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../public/swagger.json');
+const errorHandlingMiddleware = require('./errorHandlingMiddleware');
 
 // Carrega as variáveis de ambiente
 dotenv.config();
@@ -21,6 +22,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Configura as rotas
 app.use('/api/classes', classRoutes);
 app.use('/api/shifts', shiftRoutes);
+
+// Configura o middleware para tratamento de erros
+app.use(errorHandlingMiddleware);
 
 // Configura a rota principal
 app.get('/', (req, res) => {
