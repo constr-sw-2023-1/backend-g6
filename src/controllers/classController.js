@@ -3,8 +3,14 @@ const { Op } = require('sequelize');
 
 
 exports.createClass = async (req, res) => {
-    const newClass = await Class.create(req.body);
-    res.status(201).json(newClass);
+    try {
+
+        const newClass = await Class.create(req.body);
+        res.status(201).json(newClass);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: err.message });
+    }
 };
 
 exports.deleteClass = async (req, res) => {
@@ -13,8 +19,13 @@ exports.deleteClass = async (req, res) => {
 };
 
 exports.updateClass = async (req, res) => {
-    const updatedClass = await Class.update(req.body, { where: { id: req.params.id } });
-    res.json(updatedClass);
+    try {
+        const updatedClass = await Class.update(req.body, { where: { id: req.params.id } });
+        res.json(updatedClass);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: err.message });
+    }
 };
 
 exports.patchClass = async (req, res) => {

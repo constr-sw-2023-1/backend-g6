@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../public/swagger.json');
 const errorHandlingMiddleware = require('./errorHandlingMiddleware');
+const cors = require('cors'); // Importa o pacote cors
 
 // Carrega as variáveis de ambiente
 dotenv.config();
@@ -18,6 +19,9 @@ app.use(express.json());
 
 // Configura o swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// Configura o middleware de CORS
+app.use(cors()); // Adiciona o middleware de CORS
 
 // Configura as rotas
 app.use('/api/classes', classRoutes);
